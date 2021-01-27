@@ -1,4 +1,16 @@
-# UN-SPIDER Recommended Practice on Burn Severity Mapping with Satellite Data
+# UN-SPIDER Recommended Practice on Burn Severity Mapping with Earth Observation Data
+
+<div align:"center">
+  <img src="https://github.com/UN-SPIDER/burn-severity/blob/master/Burn_severity_overview.JPG">
+</div>
+
+## Table of contents
+[Overview](#overview)  
+[Methodoogy](#methodology)  
+[Approach with Python](#approach-with-python)  
+[Processing steps](#processing-steps)
+
+
 ## Overview
 Wildfires can result in the loss of human life and influence different ecological processes as they partially or completely remove the vegetation layer. Therefore, it is essential to assess the severity of the impacted area. This Recommended Practice was developed to help contribute to the assessment of areas affected by wildfires. It combines the use of Landsat 8 or Sentinel-2 pre- and post-fire imagery, and the Normalized Burn Ration (NBR) index. The Recommended Practice was designed specifically to assess large areas.
 The Recommended Practice can be followed using the following programming languages and GIS software:  
@@ -9,10 +21,6 @@ The Recommended Practice can be followed using the following programming languag
   * **[Jupyter Notebook (in this repository)](https://github.com/UN-SPIDER/burn-severity/blob/master/burn_severity.ipynb)**
   * **[Python script (in this repository)](https://github.com/UN-SPIDER/burn-severity/blob/master/burn_severity1.py)**
 - [Google Earth Engine with Landsat 8 or Sentinel-2](https://code.earthengine.google.com/b455ba8cf4b5bee822bb7ff8935e6209)  
-
-<div align:"center">
-  <img src="https://github.com/UN-SPIDER/burn-severity/blob/master/Burn_severity_overview.JPG">
-</div>
 
 ------
 ## Methodology
@@ -26,9 +34,9 @@ The following images are needed:
 - Shapefile of the area of interest
 - QGIS, R, Python or Google Earth Engine  
 
-The following parts will outline the approach with Python and Anaconda.
+The following part will outline the approach with Python and Anaconda.
 
-## Approach with Python
+## Approach with Python  
 ### Download and install Anaconda 3
 To run the following Jupyter Notebook you need python installed on your computer. We recommend downloading and installing Anaconda 3 (https://www.anaconda.com/download/) with the python 3.6 version as it includes a lot of useful packages.
 
