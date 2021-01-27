@@ -1,7 +1,8 @@
-# UN-SPIDER Recommended Practice on Burn Severity Mapping with Earth Observation Data
+![UN-SPIDER Knowledge Portal header](https://github.com/UN-SPIDER/burn-severity-mapping-EO/blob/master/img/KP_header_1.png)
+# UN-SPIDER Recommended Practice on Burn Severity Mapping
 
 <div align:"center">
-  <img src="https://github.com/UN-SPIDER/burn-severity/blob/master/Burn_severity_overview.JPG">
+  <img src="https://github.com/UN-SPIDER/burn-severity-mapping-EO/blob/master/img/Burn_severity_overview.JPG">
 </div>
 
 ## Table of contents
@@ -12,7 +13,7 @@
 
 
 ## Overview
-Wildfires can result in the loss of human life and influence different ecological processes as they partially or completely remove the vegetation layer. Therefore, it is essential to assess the severity of the impacted area. This Recommended Practice was developed to help contribute to the assessment of areas affected by wildfires. It combines the use of Landsat 8 or Sentinel-2 pre- and post-fire imagery, and the Normalized Burn Ration (NBR) index. The Recommended Practice was designed specifically to assess large areas.
+Wildfires can result in the loss of human life and influence different ecological processes as they partially or completely remove the vegetation layer. Therefore, it is essential to assess the severity of the impacted area. This Recommended Practice was developed to help contribute to the assessment of areas affected by wildfires. It combines the use of Landsat 8 or Sentinel-2 pre- and post-fire satellite imagery, and the Normalized Burn Ration (NBR) index. The Recommended Practice was designed specifically to assess large areas.
 The Recommended Practice can be followed using the following programming languages and GIS software:  
 - [QGIS with Sentinel-2](https://un-spider.org/advisory-support/recommended-practices/recommended-practice-burn-severity/Step-by-Step/QGIS-sentinel2)  
 - [QGIS with Landsat 8](https://un-spider.org/advisory-support/recommended-practices/recommended-practice-burn-severity/Step-by-Step/QGIS)
