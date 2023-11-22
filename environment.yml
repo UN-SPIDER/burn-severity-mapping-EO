@@ -9,6 +9,6 @@ dependencies:
   - numpy=1.15.*
   - matplotlib
   - geopandas= 0.4.0
-  - rasterio= 1.0.7
+  - rasterio= 1.0.*
   - ipython
   - jupyter
