@@ -12,4 +12,4 @@ dependencies:
   - rasterio= 1.*
   - ipython
   - jupyter
-  - sentinelhub
+  - pystac-client
