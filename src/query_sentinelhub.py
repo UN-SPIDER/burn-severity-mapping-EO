@@ -8,7 +8,7 @@ INSTANCE_ID = 'YOUR-INSTANCE-ID'
 
 def query_sentinelhub(input_shp, resolution, time_range):
 
-    bounds = shp.bounds.values[0]
+    bounds = input_shp.bounds.values[0]
     bbox = BBox(bbox=list(bounds), crs=CRS.WGS84)
 
     wms=True
@@ -45,7 +45,7 @@ def query_sentinelhub(input_shp, resolution, time_range):
 
 def sentinel_median_over_time(sentinel_list):
     #concatenate images along a new time axis
-    timeseries_img = np.stack(data, axis=0)
+    timeseries_img = np.stack(sentinel_list, axis=0)
 
     #calculate median along time axis
     median_img = np.median(timeseries_img, axis=0)
