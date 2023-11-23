@@ -4,12 +4,12 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - python=3.8
-  - gdal=2.*
-  - numpy=1.*
+  - python
+  - gdal
+  - numpy
   - matplotlib
-  - geopandas= 0.*
-  - rasterio= 1.*
+  - geopandas
+  - rasterio
   - ipython
   - jupyter
   - pystac-client
