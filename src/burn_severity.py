@@ -5,9 +5,9 @@ Created on Tue Nov 27 13:43:07 2018
 @author: egli.michailidou
 """
 
-import osr
-import ogr
-import gdal
+from osgeo import osr
+from osgeo import ogr
+from osgeo import gdal
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
