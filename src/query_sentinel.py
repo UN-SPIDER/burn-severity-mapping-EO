@@ -13,7 +13,10 @@ class Sentinel2Client:
         self.geojson_bounds = geojson_bounds
 
     def query(self, date_range, cloud_cover=20):
-        date_range_fmt = {"gte": date_range[0], "lte": date_range[1]}
+
+        date_range_fmt = "{}/{}".format(
+            date_range[0], date_range[1]
+        )
 
         query = {
             "collections": ["sentinel-s2-l2a-cogs"],
