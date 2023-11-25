@@ -14,7 +14,7 @@ def ingest_BARC_zip_file(zip_file_path):
                 with tempfile.TemporaryDirectory() as tmp_dir:
                     # Extract the related files to the temporary directory
                     shp_base = os.path.splitext(file_name)[0]
-                    for ext in [".shp", ".shx", ".dbf"]:
+                    for ext in [".shp", ".shx", ".dbf", ".prj"]:
                         zip_ref.extract(shp_base + ext, path=tmp_dir)
 
                     print("Found shapefile: {}".format(file_name))
