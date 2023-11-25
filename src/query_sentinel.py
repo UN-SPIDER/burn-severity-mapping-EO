@@ -3,7 +3,7 @@ import geopandas as gpd
 from pystac_client import Client
 from datetime import datetime
 
-SENTINEL2_PATH = "https://earth-search.aws.element84.com/v0"
+SENTINEL2_PATH = "https://earth-search.aws.element84.com/v1"
 
 
 class Sentinel2Client:
