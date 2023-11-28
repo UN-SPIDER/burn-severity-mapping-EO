@@ -7,24 +7,40 @@ SENTINEL2_PATH = "https://earth-search.aws.element84.com/v1"
 
 
 class Sentinel2Client:
-    def __init__(self, geojson_bounds):
+    def __init__(self, geojson_bounds, buffer = .1):
         self.path = SENTINEL2_PATH
         self.client = Client.open(self.path)
         self.geojson_bounds = geojson_bounds
+        geojson_bbox = geojson_bounds.bounds.to_numpy()[0]
+        self.bbox = [
+            geojson_bbox[0].round(decimals=2) - buffer,
+            geojson_bbox[1].round(decimals=2) - buffer,
+            geojson_bbox[2].round(decimals=2) + buffer,
+            geojson_bbox[3].round(decimals=2) + buffer
+        ]
 
-    def query(self, date_range, cloud_cover=20):
+
+
+    def query(self, date_range, cloud_cover=20, from_bbox = False, max_items = None):
 
         date_range_fmt = "{}/{}".format(
             date_range[0], date_range[1]
         )
 
         query = {
-            "collections": ["sentinel-s2-l2a-cogs"],
-            "intersects": self.geojson_bounds,
+            "collections": ["sentinel-2-l2a"],
             "datetime": date_range_fmt,
-            "query": {"eo:cloud_cover": {"lt": cloud_cover}},
+            # "query": {"eo:cloud_cover": {"lt": cloud_cover}}
         }
 
-        items = self.client.search(**query).get_all_items()
+        if from_bbox:
+            query["bbox"] = self.bbox
+        else:
+            query["intersects"] = self.geojson_bounds
+
+        if max_items:
+            query["max_items"] = max_items
+
+        items = self.client.search(**query)
 
         return items
