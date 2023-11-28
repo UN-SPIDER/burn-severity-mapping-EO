@@ -15,4 +15,4 @@ echo "Downloaded the data"
 unzip workspace/data/baer_classifications.zip -d workspace/data
 echo "Unzipped the data"
 echo "Data in workspace/data:"
-ll workspace/data
+ls workspace/data
