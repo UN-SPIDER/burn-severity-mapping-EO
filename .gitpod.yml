@@ -3,6 +3,6 @@ image:
 
 tasks:
   - init: |
-      bash ./init.sh
+      bash ./init_prebuild.sh
   - command: |
-      conda activate burn-severity
+      bash ./init_runtime.sh
