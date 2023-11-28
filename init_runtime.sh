@@ -6,3 +6,6 @@ curl -L -o data/baer_classifications.zip https://storage.googleapis.com/national
 
 # Unzip the data
 unzip data/baer_classifications.zip -d data
+
+# Activate the conda environment
+conda activate burn-severity
