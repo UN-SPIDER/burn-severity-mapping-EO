@@ -41,6 +41,6 @@ class Sentinel2Client:
         if max_items:
             query["max_items"] = max_items
 
-        items = self.client.search(**query)
+        items = self.client.search(**query).item_collection()
 
         return items

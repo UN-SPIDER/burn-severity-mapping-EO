@@ -4,14 +4,18 @@ Created on Tue Nov 27 13:43:07 2018
 
 @author: egli.michailidou
 """
-
+import os
 from osgeo import osr
 from osgeo import ogr
 from osgeo import gdal
 import numpy as np
+import boto3
+from botocore.exceptions import NoCredentialsError
+import requests
 import matplotlib
 import matplotlib.pyplot as plt
 import rasterio
+from rasterio.merge import merge
 import glob
 from rasterio.plot import show
 from rasterio.mask import mask
@@ -19,25 +23,32 @@ from shapely.geometry import mapping
 import geopandas as gpd
 import math
 
-def read_band_image(band, path):
+os.environ["AWS_NO_SIGN_REQUEST"] = "YES" # to avoid signing requests, avoid AWS auth
+
+def read_band_image_from_stac_item_collection(band, item_collection):
     """
-    This function takes as input the Sentinel-2 band name and the path of the 
-    folder that the images are stored, reads the image and returns the data as
-    an array
+    This function takes as input the Sentinel-2 band name and a PySTAC ItemCollection,
+    reads the image from each item's asset for the given band, and returns the merged
+    data from all images as an array.
     input:   band           string            Sentinel-2 band name
-             path           string            path of the folder
+             item_collection ItemCollection   PySTAC ItemCollection
     output:  data           array (n x m)     array of the band image
              spatialRef     string            projection 
              geoTransform   tuple             affine transformation coefficients
              targetprj                        spatial reference
     """
-    a = path+'*B'+band+'*.jp2'
-    img = gdal.Open(glob.glob(a)[0])
-    data = np.array(img.GetRasterBand(1).ReadAsArray())
-    spatialRef = img.GetProjection()
-    geoTransform = img.GetGeoTransform()
-    targetprj = osr.SpatialReference(wkt = img.GetProjection())
-    return data, spatialRef, geoTransform, targetprj
+    images = []
+    for item in item_collection:
+        asset = item.assets.get(band)
+        if asset is not None:
+            if is_url_valid(asset.href):
+                with rasterio.open(asset.href) as src:
+                    images.append(src)
+    mosaic, __out_trans = merge(images)
+    spatialRef = images[0].GetProjection()
+    geoTransform = images[0].GetGeoTransform()
+    targetprj = osr.SpatialReference(wkt = images[0].GetProjection())
+    return mosaic, spatialRef, geoTransform, targetprj
 
 def nbr(band1, band2):
     """
@@ -180,3 +191,18 @@ def reclassify(array):
                 reclass[i,j] = 5
                 
     return reclass
+
+def is_s3_url_valid(url):
+    s3 = boto3.resource('s3')
+    bucket_name = url.split('/')[2]
+    key = '/'.join(url.split('/')[3:])
+    bucket = s3.Bucket(bucket_name)
+    try:
+        s3.meta.client.head_object(Bucket=bucket_name, Key=key)
+        return True
+    except NoCredentialsError:
+        print("No AWS credentials found")
+        return False
+    except Exception as e:
+        print(f"Invalid S3 URL: {url}. Exception: {str(e)}")
+        return False
