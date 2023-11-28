@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Change to the /workspace directory to persist our BAER data
+cd /workspace
+
 # Create a new conda environment from the environment.yml file
 mamba env create -f environment.yml
 
