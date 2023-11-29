@@ -5,5 +5,5 @@ tasks:
   - init: |
       bash ./init_prebuild.sh
   - command: |
+      conda init bash
       bash ./init_runtime.sh
-      conda activate burn-severity

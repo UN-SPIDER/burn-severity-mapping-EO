@@ -11,11 +11,5 @@ then
     unzip data/baer_classifications.zip -d data
 fi
 
-# Init the conda environment
-conda init bash
-
-# Need to source bashrc to get the init changes in the current shell
-source ~/.bashrc
-
 # Activate our environment
 conda activate burn-severity
