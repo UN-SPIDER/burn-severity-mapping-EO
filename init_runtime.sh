@@ -10,6 +10,3 @@ then
     # Unzip the data
     unzip data/baer_classifications.zip -d data
 fi
-
-# Activate our environment
-conda activate burn-severity
