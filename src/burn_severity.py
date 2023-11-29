@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Nov 27 13:43:07 2018
-
-@author: egli.michailidou
-"""
 import os
 from osgeo import osr
 from osgeo import ogr
@@ -11,6 +5,7 @@ from osgeo import gdal
 import numpy as np
 import boto3
 from botocore.exceptions import NoCredentialsError
+from botocore.handlers import disable_signing
 import requests
 import matplotlib
 import matplotlib.pyplot as plt
@@ -41,9 +36,7 @@ def read_band_image_from_stac_item_collection(band, item_collection):
     for item in item_collection:
         asset = item.assets.get(band)
         if asset is not None:
-            if is_url_valid(asset.href):
-                with rasterio.open(asset.href) as src:
-                    images.append(src)
+            rasterio.open(asset.href)
     mosaic, __out_trans = merge(images)
     spatialRef = images[0].GetProjection()
     geoTransform = images[0].GetGeoTransform()
@@ -193,13 +186,17 @@ def reclassify(array):
     return reclass
 
 def is_s3_url_valid(url):
-    s3 = boto3.resource('s3')
+    s3 = boto3.client('s3')
+    s3.meta.events.register('choose-signer.s3.*', disable_signing)
+
     bucket_name = url.split('/')[2]
     key = '/'.join(url.split('/')[3:])
-    bucket = s3.Bucket(bucket_name)
     try:
-        s3.meta.client.head_object(Bucket=bucket_name, Key=key)
-        return True
+        response = s3.list_objects_v2(Bucket=bucket_name, Prefix=key)
+        for obj in response.get('Contents', []):
+            if obj['Key'] == key:
+                return True
+        return False
     except NoCredentialsError:
         print("No AWS credentials found")
         return False

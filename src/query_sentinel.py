@@ -2,14 +2,18 @@ import requests
 import geopandas as gpd
 from pystac_client import Client
 from datetime import datetime
+import planetary_computer
 
-SENTINEL2_PATH = "https://earth-search.aws.element84.com/v1"
+SENTINEL2_PATH = "https://planetarycomputer.microsoft.com/api/stac/v1"
 
 
 class Sentinel2Client:
     def __init__(self, geojson_bounds, buffer = .1):
         self.path = SENTINEL2_PATH
-        self.client = Client.open(self.path)
+        self.client = Client.open(
+            self.path,
+            modifiers = planetary_computer.sign_inplace
+        )
         self.geojson_bounds = geojson_bounds
         geojson_bbox = geojson_bounds.bounds.to_numpy()[0]
         self.bbox = [
