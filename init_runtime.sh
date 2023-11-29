@@ -1,5 +1,11 @@
-# Check if the data/baer directory exists
-if [ ! -d "/data" ]
+# Init conda
+source /opt/conda/etc/profile.d/conda.sh
+
+# Activate your conda environment
+conda activate burn-severity
+
+# Check if the data/baer directory exists, from a previous initialization of this container
+if [ ! -d "/workspace/data" ]
 then
     # Create the data directory
     mkdir -p data
