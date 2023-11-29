@@ -6,6 +6,8 @@ channels:
 dependencies:
   - python
   - ipykernel
+  - rich
+  - rich-with-jupyter
   - gdal
   - numpy
   - matplotlib
