@@ -12,7 +12,7 @@ class Sentinel2Client:
         self.path = SENTINEL2_PATH
         self.client = Client.open(
             self.path,
-            modifiers = planetary_computer.sign_inplace
+            modifier = planetary_computer.sign_inplace
         )
         self.geojson_bounds = geojson_bounds
         geojson_bbox = geojson_bounds.bounds.to_numpy()[0]

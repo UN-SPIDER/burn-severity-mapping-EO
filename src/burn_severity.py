@@ -36,11 +36,13 @@ def read_band_image_from_stac_item_collection(band, item_collection):
     for item in item_collection:
         asset = item.assets.get(band)
         if asset is not None:
-            rasterio.open(asset.href)
+            image = rasterio.open(asset.href)
+            images.append(image)
+    print('Merging - number of images: ', len(images))
     mosaic, __out_trans = merge(images)
-    spatialRef = images[0].GetProjection()
-    geoTransform = images[0].GetGeoTransform()
-    targetprj = osr.SpatialReference(wkt = images[0].GetProjection())
+    spatialRef = images[0].crs
+    geoTransform = images[0].get_transform()
+    targetprj = osr.SpatialReference(wkt = images[0].crs.wkt)
     return mosaic, spatialRef, geoTransform, targetprj
 
 def nbr(band1, band2):

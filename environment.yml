@@ -6,6 +6,9 @@ channels:
 dependencies:
   - python
   - ipykernel
+  - rioxarray
+  - stackstac
+  - contextily
   - rich
   - rich-with-jupyter
   - gdal
