@@ -6,3 +6,4 @@ tasks:
       bash ./init_prebuild.sh
   - command: |
       bash ./init_runtime.sh
+      conda activate burn-severity
