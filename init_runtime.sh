@@ -1,5 +1,5 @@
 # Check if the data/baer directory exists
-if [ ! -d "/data/baer" ]
+if [ ! -d "/data" ]
 then
     # Create the data directory
     mkdir -p data
