@@ -5,7 +5,7 @@ source /opt/conda/etc/profile.d/conda.sh
 conda activate burn-severity
 
 # Check if the data/baer directory exists, from a previous initialization of this container
-if [ ! -d "/workspace/data" ]
+if [ ! -d "/workspace/burn-severity-mapping-poc/data " ]
 then
     # Create the data directory
     mkdir -p data
