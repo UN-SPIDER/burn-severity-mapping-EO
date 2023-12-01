@@ -1,8 +1,0 @@
-image:
-  file: .gitpod.Dockerfile
-
-tasks:
-  - before: |
-      bash ./init_prebuild.sh
-  - command: |
-      bash ./init_runtime.sh

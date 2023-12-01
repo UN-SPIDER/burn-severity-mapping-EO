@@ -1,6 +1,8 @@
 # Init conda
 source /opt/conda/etc/profile.d/conda.sh
 
+echo "Hello from runtime!"
+
 # Activate your conda environment
 conda activate burn-severity
 
