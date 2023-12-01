@@ -13,6 +13,6 @@
         }
     },
     "postCreateCommand": [
-        "bash .devcontainer/init_prebuild.sh && bash .devcontainer/init_runtime.sh"
+        ".devcontainer/start_container.sh"
     ]
 }
