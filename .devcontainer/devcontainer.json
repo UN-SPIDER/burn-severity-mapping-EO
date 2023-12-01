@@ -13,8 +13,6 @@
         }
     },
     "postCreateCommand": [
-        "mamba install -n base nb_conda_kernels",
-        "/bin/bash .devcontainer/init_prebuild.sh",
-        "/bin/bash .devcontainer/init_runtime.sh"
+        "bash .devcontainer/init_prebuild.sh && bash .devcontainer/init_runtime.sh"
     ]
 }
